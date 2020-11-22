@@ -1,0 +1,60 @@
+<odoo>
+    <data>
+                                        #                    ________________
+
+        <!-- gg_operation form view -->
+        <record id="gg_operation_view_form" model="ir.ui.view">
+            <field name="name">gg_operation.view.form</field>
+            <field name="model">gg_operation</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <button string="fun_calc" type="object" name="fun_calc" />
+                        <group>
+                            
+                            <field name="name" />
+                            <field name="key_data" />
+                         
+                            <field name="code" />
+                            <field name="qent" />
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- gg_operation tree view -->
+        <record id="gg_operation_view_tree" model="ir.ui.view">
+            <field name="name">gg_operation.view.tree</field>
+            <field name="model">gg_operation</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <!-- Add your fields here -->
+                    <field name="name" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- gg_operation action window -->
+        <record id="gg_operation_action" model="ir.actions.act_window">
+            <field name="name">gg_operation.action</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">gg_operation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="view_type">form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <!-- This Menu Item must have a parent and an action -->
+        <menuitem id="menu_gg_operation" name="gg_operation" parent="menu_root_gg_DB" action="gg_operation_action" sequence="1" />
+                                        #                    ________________
+
+    </data>
+</odoo>

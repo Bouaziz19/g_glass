@@ -1,0 +1,9 @@
+<odoo>
+  <data>
+  <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+<menuitem id="menu_root_g_glass" name="g_glass" sequence="1" 	web_icon="g_glass,static/img/glass.png"/>
+  <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
+<menuitem id="menu_root_gg_DB" name="DB" sequence="1" 	parent="menu_root_g_glass"/>
+
+  </data>
+</odoo>

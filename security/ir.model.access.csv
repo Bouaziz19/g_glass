@@ -1,0 +1,9 @@
+id,name,group_id:id,model_id:id,perm_read,perm_write,perm_create,perm_unlink
+1_gg,r1_gg_commande,g_glass_user,model_gg_commande,1,1,1,1
+2_gg,r2_gg_commande,g_glass_user,model_gg_facteur,1,1,1,1
+4_gg,r4_gg_commande,g_glass_user,model_gg_operation,1,1,1,1
+5_gg,r5_gg_commande,g_glass_user,model_gg_lin_commande,1,1,1,1
+6_gg,r6_gg_commande,g_glass_user,model_gg_partner,1,1,1,1
+7_gg,r7_gg_commande,g_glass_user,model_gg_lin_com2,1,1,1,1
+
+

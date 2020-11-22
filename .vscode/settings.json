@@ -1,0 +1,22 @@
+{
+    "python.pythonPath": "c:\\Program Files (x86)\\Odoo 12.0\\python\\python.exe",
+    "workbench.colorCustomizations": {
+    "statusBar.background": "#1A1A1A",
+    "statusBar.noFolderBackground": "#212121",
+    "statusBar.debuggingBackground": "#263238",
+    "indentRainbow.errorColor": "rgba(0,0,0,0.0)",
+    "editorIndentGuide.background": "#263238",
+    "tree.indentGuidesStroke": "#263238",
+    "editorIndentGuide.activeBackground": "#263238"
+   
+  },
+  
+  "cSpell.words": [
+    "odoo",
+    "vals"
+],
+"editor.detectIndentation": false,
+"diffEditor.ignoreTrimWhitespace": false,
+"editor.trimAutoWhitespace": false
+
+}
