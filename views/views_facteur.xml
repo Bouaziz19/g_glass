@@ -10,6 +10,12 @@
               <sheet>
                   <group>
                       <field name="name"/>
+                      <field name="id_gg_produit"/>
+                      <field name="state"/>
+                      <field name="qent"/>
+                      
+                      
+                      <button string="vald" type="object" name="fun_calc"  />
                   </group>
               </sheet>
           </form>

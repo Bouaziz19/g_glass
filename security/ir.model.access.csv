@@ -5,5 +5,15 @@ id,name,group_id:id,model_id:id,perm_read,perm_write,perm_create,perm_unlink
 5_gg,r5_gg_commande,g_glass_user,model_gg_lin_commande,1,1,1,1
 6_gg,r6_gg_commande,g_glass_user,model_gg_partner,1,1,1,1
 7_gg,r7_gg_commande,g_glass_user,model_gg_lin_com2,1,1,1,1
+8_gg,r8_gg_commande,g_glass_user,model_gg_vit_para,1,1,1,1
+9_gg,r9_gg_commande,g_glass_user,model_gg_vit_typ,1,1,1,1
+10_gg,r10_gg_commande,g_glass_user,model_gg_lin_vit,1,1,1,1
+11_gg,r11_gg_commande,g_glass_user,model_gg_vit,1,1,1,1
+12_gg,r12_gg_commande,g_glass_user,model_gg_produit,1,1,1,1
+13_gg,r13_gg_commande,g_glass_user,model_gg_pro_glass,1,1,1,1
+14_gg,r14_gg_commande,g_glass_user,model_gg_2v,1,1,1,1
+
+
+
 
 

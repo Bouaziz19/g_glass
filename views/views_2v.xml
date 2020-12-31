@@ -1,0 +1,76 @@
+<odoo>
+  <data>
+
+  <!-- gg_2v form view -->
+  <record id="gg_2v_view_form" model="ir.ui.view">
+      <field name="name">gg_2v.view.form</field>
+      <field name="model">gg_2v</field>
+      <field name="arch" type="xml">
+          
+          <form string="">
+              <sheet>
+                
+                <group >
+                    <field name="name" />
+                    <field name="active" />
+                    
+                    
+                </group >
+                <group col="12">
+                                            
+                    <group colspan="3" ><label for="street" string="2 V "/> </group>
+                    <group colspan="2"><field name="id_vv" nolabel="1"/></group>
+                   
+                    <label for="street" string=" "/>
+                </group> 
+                <group >
+                                            
+                    <field string="operation" name="ids__operation" nolabel="1">
+                        <tree  create="true" edit="true"  editable="bottom"  >
+                            <field name="name" />
+                            <field name="key_data" />
+                            <field name="qent" />
+              
+                        </tree>
+                        
+                    </field>
+                </group> 
+              </sheet>
+          </form>
+      </field>
+  </record>
+<!-- gg_2v tree view -->
+<record id="gg_2v_view_tree" model="ir.ui.view">
+    <field name="name">gg_2v.view.tree</field>
+    <field name="model">gg_2v</field>
+    <field name="arch" type="xml">
+        <tree>
+            <!-- Add your fields here -->
+            <!-- <field name="id"/> -->
+            <field name="name"/>
+        </tree>
+    </field>
+</record>
+<!-- gg_2v action window -->
+<record id="gg_2v_action" model="ir.actions.act_window">
+    <field name="name">gg_2v.action</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">gg_2v</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+        </p><p>
+            <!-- More details about what a user can do with this object will be OK --> 
+        </p>
+    </field>
+</record>
+
+
+<!-- This Menu Item must have a parent and an action -->
+<menuitem id="menu_gg_2v" name="gg_2v" parent="menu_root_g_glass" action="gg_2v_action" sequence="1"/>
+
+
+  </data>
+</odoo>

@@ -9,12 +9,14 @@
             <field name="arch" type="xml">
                 <form string="">
                     <sheet>
-                        <button string="fun_calc" type="object" name="fun_calc" />
+                        <!-- <button string="fun_calc" type="object" name="fun_calc" /> -->
                         <group>
                             
                             <field name="name" />
+
                             <field name="key_data" />
-                         
+                            <field name="id_gg_produit" />
+                            
                             <field name="code" />
                             <field name="qent" />
                         </group>
@@ -28,9 +30,21 @@
             <field name="name">gg_operation.view.tree</field>
             <field name="model">gg_operation</field>
             <field name="arch" type="xml">
-                <tree>
+                <tree  >
+                    <!-- <tree  editable="bottom"> -->
                     <!-- Add your fields here -->
                     <field name="name" />
+
+                            <field name="key_data" />
+                            <field name="id_gg_produit" />
+                            <field name="PrixaA" />
+                            <field name="PvDA" />
+                            <field name="code" />
+                            <field name="code" />
+                            <field name="qent" />
+                            <field name="op_type" />
+                            
+                            
                 </tree>
             </field>
         </record>

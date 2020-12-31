@@ -1,0 +1,174 @@
+<odoo>
+    <data>
+        <record id="g_glass.format_report_gg_commande" model="report.paperformat">
+            <field name="name">Format portrait BonCommande</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">40</field>
+            <field name="margin_left">3</field>
+            <field name="margin_right">3</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+        <report string="report_gg_commande5" 
+            id="action_report_gg_commande5" 
+            model="gg_commande" 
+            name="g_glass.report_gg_commande5" 
+            file="g_glass.report_gg_commande5" 
+            report_type="qweb-pdf"  
+            menu="False"
+            />
+<!-- paperformat_id=""  -->
+<record id="g_glass.action_report_gg_commande5" model="ir.actions.report">
+    <field name="paperformat_id" ref="g_glass.format_report_gg_commande" />
+</record>
+
+<template priority="100" id="g_glass.new_header" inherit_id="web.external_layout_standard">
+    <xpath expr="//div[@class='header']" position="replace">
+    <div invisible="1"><h6>ggggggggggggg</h6></div>
+    </xpath>
+    <xpath expr="//div[@class='footer o_standard_footer']" position="replace">
+    <div invisible="1"><h6>gggggggggggggggggggggggggggggg</h6></div>
+    </xpath>
+</template>
+
+<template id="external_layout_header_g" inherit_id="web.external_layout_standard">
+    <xpath expr="//div[@class='header']" position="replace">
+        <div class="header"> 
+            <div class="row"> <div class="col-5"> </div> 
+            <div class="col-6"> <img src="/g_glass/static/img/logo.png" align="center" style="max-height: 150px;max-width:400;align:center"/> </div> 
+        </div> </div>
+    </xpath>
+</template>
+    <template id="report_gg_commande5" >
+      <t t-call="g_glass.new_header">
+       
+                                <t t-call="web.html_container">
+                                 
+                                      <t t-foreach="docs" t-as="doc">
+                                        <div class="header"> 
+                                            <div class="row"> <div class="col-5"> </div> 
+                                            <div class="col-6"> <img src="/g_glass/static/img/logo.png" align="center" style="max-height: 150px;max-width:400;align:center"/> </div> 
+                                        </div> </div>
+                                        
+                                       <div class="page">
+                                        <table > 
+           <tr>
+             <td style="width:40%;">EURL KRELIFA IMPORT VITRERIE</td>
+             <td style="width:35%;"/>  
+             <td style="width:25%;">khemis Miliana le :21/07/2020</td>
+           </tr>
+           <tr>
+             <td style="width:40%;">TRANSFORMATION DE TOUS</td>
+             <td style="width:35%;"/>  
+             <td style="width:25%;"/>
+           </tr>
+           <tr>
+             <td style="width:40%;">TYPES DE VERRE </td>
+             <td style="width:30%;"> </td> 
+             <td style="width:30%;">06-61-04-07-69</td>
+           </tr>
+           <tr>
+             <td style="width:40%;">( FEUILLETE-TREMPE-DOUBLE VITRAGE )  </td>
+             <td style="width:30%;"/>  
+             <td style="width:30%;"/>
+           </tr>
+           <tr/>
+         <tr>
+             <td style="width:40%;"> </td>
+             <td style="width:20%;"/>  
+             <td style="width:40%;">Doit : GLOBAL INOX</td>
+           </tr>
+         </table>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+         <br/>
+             <!-- <p>This object's name is <span t-field="doc.id"/></p>
+            <p>This object's name is <span t-field="doc.ids__lin_commande"/></p> -->
+         
+              <br/> <br/><t t-set="sale_order" t-value="doc.get_sale_order_data()"/>
+        <br/>
+         
+          <table style="border: 3px solid ; border-collapse: collapse;font-size:20px" width="100%" >
+                   <col width="30%"  />
+                   <col width="10%" />
+                   <col width="10%"/>
+                   <col width="10%"/>
+                   <col width="20%"/>
+                   <col width="30%"/>
+                   <thead>
+                                  <tr>
+                                     <th style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>Désignation </th>
+                                     <th style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]>Largeur</th>
+                                     <th style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]>Hauteur</th>
+                                     <th style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>Qté</th>
+                                     <th style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]>Prix Unitaire</th>
+                                     <th style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]>Montant HT</th>
+                                  </tr>
+                                  </thead>
+                           <tbody class="invoice_tbody" >     
+          <t t-foreach="sale_order" t-as="otb" >
+            <t t-foreach="otb" t-as="otr">
+                              <tr>
+                                  <td style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]><t t-esc="otr[0]"/></td>
+                                  <td style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]><t t-esc="otr[1]"/></td>
+                                  <td style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]><t t-esc="otr[2]"/></td>
+                                  <td style="border: 3px;border: 1px solid #000000; text-align: left;border-collapse: collapse;"><![CDATA[&nbsp;]]><t t-esc="otr[3]"/></td>
+                                  <td style="border: 3px;border: 1px solid #000000; text-align: right;border-collapse: collapse;"><t t-esc="otr[4]"/><![CDATA[&nbsp;]]></td>
+                                  <td style="border: 3px;border: 1px solid #000000; text-align: right;border-collapse: collapse;"><t t-esc="otr[5]"/><![CDATA[&nbsp;]]></td>
+        
+                                  
+                              </tr>
+                             
+                              
+                          </t>                   
+                          
+                              </t>
+                           <tr>
+                                  <td colspan="5" style="border: 3px;border: 1px solid #000000; text-align: center;border-collapse: collapse;"><![CDATA[&nbsp;]]><![CDATA[&nbsp;]]>Total</td>
+                                  <td style="border: 3px;border: 1px solid #000000; text-align: right;border-collapse: collapse;"><span t-field="doc.totale"/><![CDATA[&nbsp;]]></td>
+        
+                                  
+                              </tr>
+                          </tbody>
+                                </table>
+                                      
+                              
+            
+                                
+                                </div> 
+                                <div class="footer o_standard_footer" >
+                                    <div >
+                                        
+                                            <table > 
+                                                <tr>
+                                                  <td style="width:75%;"></td>
+                                                  <td style="width:25%;"><h5>Cachet et Signature :</h5></td>
+                                                </tr>
+                                            </table > 
+                                               
+                                        <br/><br/><br/><br/><br/>
+                                        <div class="text-center" style="border-top: 4px solid black; font-size: 12px;">
+                                              <ul class="list-inline">
+                                                 <li>Page:<span class="page"/> - <span class="topage"/></li>
+                                              </ul>
+                                            </div></div>
+                                </div>
+                
+                                    </t>
+                                </t>
+                            </t>
+                
+            
+        </template>
+       
+
+    </data>
+</odoo>

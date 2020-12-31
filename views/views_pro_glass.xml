@@ -1,0 +1,75 @@
+<odoo>
+  <data>
+
+  <!-- gg_pro_glass form view -->
+  <record id="gg_pro_glass_view_form" model="ir.ui.view">
+      <field name="name">gg_pro_glass.view.form</field>
+      <field name="model">gg_pro_glass</field>
+      <field name="arch" type="xml">
+          <form string="">
+              <sheet>
+                  <group>
+                    <field name="name" string="Designation"/>
+                    <!-- <field name="QteBoite"/>
+                    <field name="Designation"/>
+                    <field name="PrixaA"/>
+                    <field name="PvDA"/>
+                    <field name="PvGA"/> -->
+                    <!-- <field name="PvFA"/> -->
+                    <!-- <field name="QteA"/> -->
+                    <!-- <field name="lon"/>
+                    <field name="lar"/>
+                    <field name="Feuille"/>
+                    <field name="ReferenceA"/> -->
+                       
+                  </group>
+              </sheet>
+          </form>
+      </field>
+  </record>
+<!-- gg_pro_glass tree view -->
+<record id="gg_pro_glass_view_tree" model="ir.ui.view">
+    <field name="name">gg_pro_glass.view.tree</field>
+    <field name="model">gg_pro_glass</field>
+    <field name="arch" type="xml">
+        <tree editable="bottom">
+            <!-- Add your fields here -->
+            <field name="name" string="Designation"/>
+                   
+                     <field name="p_type"/>
+                    <field name="PrixaA"/>
+                    <field name="PvDA"/> 
+                    <field name="PvGA"/>
+                    <field name="PvFA"/>
+                    <field name="QteA"/>
+                    <field name="lon"/>
+                    <field name="lar"/> 
+                    <field name="Feuille"/>
+                    <field name="ReferenceA"/>
+                  <field name="QteBoite"/> 
+        </tree>
+    </field>
+</record>
+<!-- gg_pro_glass action window -->
+<record id="gg_pro_glass_action" model="ir.actions.act_window">
+    <field name="name">gg_pro_glass.action</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">gg_pro_glass</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+        </p><p>
+            <!-- More details about what a user can do with this object will be OK --> 
+        </p>
+    </field>
+</record>
+
+
+<!-- This Menu Item must have a parent and an action -->
+<menuitem id="menu_gg_pro_glass" name="gg_pro_glass" parent="menu_root_g_glass" action="gg_pro_glass_action" sequence="1"/>
+
+
+  </data>
+</odoo>

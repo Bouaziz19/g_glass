@@ -1,0 +1,95 @@
+<odoo>
+  <data>
+
+  <!-- gg_vit form view -->
+  <record id="gg_vit_view_form" model="ir.ui.view">
+      <field name="name">gg_vit.view.form</field>
+      <field name="model">gg_vit</field>
+      <field name="arch" type="xml">
+          <form string="Invoice" class="o_invoice_form">
+            <header>
+            <!-- <button name="st_st" type="object" states='av,gc' string="st" />
+            <button name="st_av" type="object" states='st,gc' string="av" />
+            <button name="st_gc" type="object" states='st,av' string="gc" /> -->
+            <!-- states='av'  attrs="{'invisible': [('state', '!=', 'av')]}"  -->
+            <button string="fun_ex" type="object" name="fun_ex"  states='av' />
+            <button string="aptvt" type="object" name="aptvt"  states='st' />
+
+            <field name="state" widget="statusbar" nolabel="1" statusbar_visible="st,av,gc" />
+            </header>
+              <sheet>
+                <group>
+                   
+                
+                  <group>
+                    <field name="name"/>
+                    <field name="id_vit_typ"  states='st' />
+                    <button string="Open popup"
+       name="%(gg_commande_action2)d"
+       type="action"
+       class="btn-link"
+       context="{'search_default_field_id': [id],}"
+       
+        states='gc' />
+              <!-- name_of_parameter: name_of_field -->
+                    <!-- <field name="state"></field> -->
+                    <field string="ids_lin_vit" name="ids_lin_vit" widget="one2many"  states='av,gc' attrs="{'readonly': [('state','!=', 'av' )]}">
+                        <tree  create="false" edit="true" editable="bottom" >
+                            <field name="id_vit_para" readonly="1" />
+                            <field name="value" />
+                                                                
+                        </tree>
+                        <form>  
+                           
+                                                                
+                        </form>
+                    </field>
+                  </group>
+                  <group  >
+                    <field name="plan_vit" widget='image' nolabel="1" />
+
+                  </group>
+                </group>
+              </sheet>
+          </form>
+      </field>
+  </record>
+<!-- gg_vit tree view -->
+<record id="gg_vit_view_tree" model="ir.ui.view">
+    <field name="name">gg_vit.view.tree</field>
+    <field name="model">gg_vit</field>
+    <field name="arch" type="xml">
+        <tree>
+            <!-- Add your fields here -->
+            <field name="name"/>
+            <field name="id_vit_typ"/>
+            <field name="ids_lin_vit"/>
+
+            <field name="state"/>
+            
+        </tree>
+    </field>
+</record>
+<!-- gg_vit action window -->
+<record id="gg_vit_action" model="ir.actions.act_window">
+    <field name="name">gg_vit.action</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">gg_vit</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+        </p><p>
+            <!-- More details about what a user can do with this object will be OK --> 
+        </p>
+    </field>
+</record>
+
+
+<!-- This Menu Item must have a parent and an action -->
+<menuitem id="menu_gg_vit" name="gg_vit" parent="menu_root_g_glass" action="gg_vit_action" sequence="1"/>
+
+
+  </data>
+</odoo>
