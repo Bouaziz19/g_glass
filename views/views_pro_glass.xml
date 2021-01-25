@@ -27,9 +27,25 @@
           </form>
       </field>
   </record>
+  <!-- gg_pro_glass tree view -->
+<record id="gg_pro_glass_view_treee" model="ir.ui.view">
+    <field name="name">gg_pro_glass.view.treee</field>
+    <field name="groups_id" eval="[(6, 0, [ref('g_glass.g_glass_st')],[ref('g_glass.g_glass_user')])]"/>
+    <field name="priority" eval="3"/>
+    <field name="model">gg_pro_glass</field>
+    <field name="arch" type="xml">
+        <tree >
+            <!-- Add your fields here -->
+            <field name="name" string="Designation"/>
+            
+        </tree>
+    </field>
+</record>
 <!-- gg_pro_glass tree view -->
-<record id="gg_pro_glass_view_tree" model="ir.ui.view">
-    <field name="name">gg_pro_glass.view.tree</field>
+<record id="gg_pro_glass_view_tree3" model="ir.ui.view">
+    <field name="name">gg_pro_glass.view.tree3</field>
+    <field name="groups_id" eval="[(6, 0, [ref('g_glass.g_glass_manager')])]"/>
+    
     <field name="model">gg_pro_glass</field>
     <field name="arch" type="xml">
         <tree editable="bottom">
@@ -68,7 +84,7 @@
 
 
 <!-- This Menu Item must have a parent and an action -->
-<menuitem id="menu_gg_pro_glass" name="gg_pro_glass" parent="menu_root_g_glass" action="gg_pro_glass_action" sequence="1"/>
+<menuitem id="menu_gg_pro_glass" name="gg_pro_glass" parent="menu_root_gg_DB" action="gg_pro_glass_action" sequence="1"/>
 
 
   </data>

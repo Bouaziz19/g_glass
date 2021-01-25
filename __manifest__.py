@@ -22,7 +22,7 @@
         "views/views_pro_glass.xml",
 
         "views/views_2v.xml",
-        #"views/views_2v.xml",
+        "views/views_client.xml",
         #"views/views_2v.xml",
         #"views/views_2v.xml",
         

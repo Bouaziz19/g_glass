@@ -3,8 +3,8 @@ id,name,group_id:id,model_id:id,perm_read,perm_write,perm_create,perm_unlink
 2_gg,r2_gg_commande,g_glass_user,model_gg_facteur,1,1,1,1
 4_gg,r4_gg_commande,g_glass_user,model_gg_operation,1,1,1,1
 5_gg,r5_gg_commande,g_glass_user,model_gg_lin_commande,1,1,1,1
-6_gg,r6_gg_commande,g_glass_user,model_gg_partner,1,1,1,1
 7_gg,r7_gg_commande,g_glass_user,model_gg_lin_com2,1,1,1,1
+75_gg,r75_gg_commande,g_glass_user,model_gg_lin_com3,1,1,1,1
 8_gg,r8_gg_commande,g_glass_user,model_gg_vit_para,1,1,1,1
 9_gg,r9_gg_commande,g_glass_user,model_gg_vit_typ,1,1,1,1
 10_gg,r10_gg_commande,g_glass_user,model_gg_lin_vit,1,1,1,1
@@ -12,8 +12,34 @@ id,name,group_id:id,model_id:id,perm_read,perm_write,perm_create,perm_unlink
 12_gg,r12_gg_commande,g_glass_user,model_gg_produit,1,1,1,1
 13_gg,r13_gg_commande,g_glass_user,model_gg_pro_glass,1,1,1,1
 14_gg,r14_gg_commande,g_glass_user,model_gg_2v,1,1,1,1
+15_gg,r15_gg_commande,g_glass_user,model_gg_client,1,1,1,1
 
+21_gg,r21_gg_commande,g_glass_manager,model_gg_commande,1,1,1,1
+22_gg,r22_gg_commande,g_glass_manager,model_gg_facteur,1,1,1,1
+24_gg,r24_gg_commande,g_glass_manager,model_gg_operation,1,1,1,1
+25_gg,r25_gg_commande,g_glass_manager,model_gg_lin_commande,1,1,1,1
+27_gg,r27_gg_commande,g_glass_manager,model_gg_lin_com2,1,1,1,1
+275_gg,r275_gg_commande,g_glass_manager,model_gg_lin_com3,1,1,1,1
+28_gg,r28_gg_commande,g_glass_manager,model_gg_vit_para,1,1,1,1
+29_gg,r29_gg_commande,g_glass_manager,model_gg_vit_typ,1,1,1,1
+210_gg,r210_gg_commande,g_glass_manager,model_gg_lin_vit,1,1,1,1
+211_gg,r211_gg_commande,g_glass_manager,model_gg_vit,1,1,1,1
+212_gg,r212_gg_commande,g_glass_manager,model_gg_produit,1,1,1,1
+213_gg,r213_gg_commande,g_glass_manager,model_gg_pro_glass,1,1,1,1
+214_gg,r214_gg_commande,g_glass_manager,model_gg_2v,1,1,1,1
+215_gg,r215_gg_commande,g_glass_manager,model_gg_client,1,1,1,1
 
-
-
-
+31_gg,r31_gg_commande,g_glass_st,model_gg_commande,1,1,1,1
+32_gg,r32_gg_commande,g_glass_st,model_gg_facteur,1,1,1,1
+34_gg,r34_gg_commande,g_glass_st,model_gg_operation,1,1,1,1
+35_gg,r35_gg_commande,g_glass_st,model_gg_lin_commande,1,1,1,1
+37_gg,r37_gg_commande,g_glass_st,model_gg_lin_com2,1,1,1,1
+375_gg,r375_gg_commande,g_glass_st,model_gg_lin_com3,1,1,1,1
+38_gg,r38_gg_commande,g_glass_st,model_gg_vit_para,1,1,1,1
+39_gg,r39_gg_commande,g_glass_st,model_gg_vit_typ,1,1,1,1
+310_gg,r310_gg_commande,g_glass_st,model_gg_lin_vit,1,1,1,1
+311_gg,r311_gg_commande,g_glass_st,model_gg_vit,1,1,1,1
+312_gg,r312_gg_commande,g_glass_st,model_gg_produit,1,1,1,1
+313_gg,r313_gg_commande,g_glass_st,model_gg_pro_glass,1,1,1,1
+314_gg,r314_gg_commande,g_glass_st,model_gg_2v,1,1,1,1
+315_gg,r315_gg_commande,g_glass_st,model_gg_client,1,1,1,1

@@ -16,7 +16,7 @@
                 </group>
                     <group>
                     <field name="prix_unti"/>
-                    <field name="prix_G"/>
+                    <!-- <field name="prix_G"/> -->
                     <field name="qent_stk"/>
                    
                     
@@ -27,18 +27,39 @@
           </form>
       </field>
   </record>
+  <record id="gg_produit_view_tree3" model="ir.ui.view">
+    <field name="name">gg_produit.view.tree3</field>
+    <field name="priority" eval="3"/>
+    <field name="model">gg_produit</field>
+    <field name="arch" type="xml">
+        <tree >
+
+            <field name="name" string="produit"/>
+
+        </tree>
+    </field>
+</record>
 <!-- gg_produit tree view -->
 <record id="gg_produit_view_tree" model="ir.ui.view">
     <field name="name">gg_produit.view.tree</field>
     <field name="model">gg_produit</field>
     <field name="arch" type="xml">
-        <tree>
-            <!-- Add your fields here -->
-            <field name="name"/>
-            <field name="prix_unti"/>
+        <tree editable="top">
+            <field name="id"/>
             
+            <field name="name"/>
+            <field name="code"/>
+            <field name="prix_unti"/>
             <field name="qent_stk"/>
-
+            <field name="unit_mes"/>
+            <field name="PrixaA"/>
+            <field name="PvDA"/>
+            <field name="PvGA"/>
+            <field name="note"/>
+            <field name="depot_1"/>
+            <field name="depot_2"/>
+            <field name="depot_3"/>
+            <field name="depot_4"/>
         </tree>
     </field>
 </record>
@@ -60,7 +81,7 @@
 
 
 <!-- This Menu Item must have a parent and an action -->
-<menuitem id="menu_gg_produit" name="gg_produit" parent="menu_root_gg_DB" action="gg_produit_action" sequence="1"/>
+<menuitem id="menu_gg_produit" name="gg_produit" parent="menu_root_gg_stock" action="gg_produit_action" sequence="1"/>
 
 
   </data>

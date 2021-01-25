@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Odoo",
+      "name": "Odoo12",
       "type": "python",
       "request": "launch",
       "cwd": "C:\\Program Files (x86)\\Odoo 12.0\\server",
@@ -10,5 +10,16 @@
       "args": ["-u", "g_glass"],
       "console": "integratedTerminal"
     }
+    ,
+    {
+        "name": "Odoo9",
+        "type": "python",
+        "request": "launch",
+        "cwd": "C:\\Program Files (x86)\\Odoo 9.0-20190401\\server",
+        "program": "C:\\Program Files (x86)\\Odoo 9.0-20190401\\server\\openerp-server",
+        // "args": ["-u", "g_glass"],
+        "console": "integratedTerminal"
+      }
+      ,
   ]
 }

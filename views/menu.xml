@@ -1,10 +1,18 @@
 <odoo>
   <data>
   <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
-<menuitem id="menu_root_g_glass" name="g_glass" sequence="1" 	web_icon="g_glass,static/img/glass.png"/>
+<menuitem id="menu_root_g_glass" name="Verre" sequence="1" 	web_icon="g_glass,static/img/glass.png"/>
   <!-- This Menu Item will appear in the Upper bar, that's why It needs NO parent or action -->
 <!-- <menuitem id="menu_root_gg_DB" name="DB" sequence="1" 	parent="menu_root_g_glass"/> -->
-<menuitem id="menu_root_gg_DB" name="DB" sequence="1" />
+<menuitem id="menu_root_gg_DB" name="DB" parent="menu_root_g_glass" sequence="1" />
+<record id="g_glass.menu_root_gg_DB" model="ir.ui.menu">
+    <field name="groups_id" eval="[(6,0,[ref('g_glass.g_glass_manager')])]"/>
+</record>
+<menuitem id="menu_root_gg_stock" name="stock" parent="menu_root_g_glass" sequence="2" />
+
+<record id="g_glass.menu_root_gg_stock" model="ir.ui.menu">
+    <field name="groups_id" eval="[(6,0,[ref('g_glass.g_glass_st')])]"/>
+</record>
 
   </data>
 </odoo>

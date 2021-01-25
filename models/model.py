@@ -6,21 +6,88 @@ class GG_commande(models.Model):
     _name = 'gg_commande'
     _description = 'gg_commande'
     name = fields.Char(string='Name')
-    field_name = fields.Many2many('comodel_name', string='')
+    num=fields.Char(string='commande N :',compute='_compute_num')
+    sequence = fields.Integer('sequence', help="Sequence for the handle.",default=10)
+    @api.one
+    def _compute_num(self):
+        self.num='CN_'+str(self.id)
+    state = fields.Selection([
+            ('0',"Brouillon"),
+            ('1', "En cours"),
+            ('2', "Terminé"),
+            ],
+        string='Status', default='0')
     ids__operation = fields.Many2many('gg_operation', string='gg_operation')
     ids__lin_commande = fields.One2many( 'gg_lin_commande', 'id_gg_commande', string='ids__lin_commande')
     ids__lin_com2 = fields.One2many('gg_lin_com2', 'id_gg_commande', string='ids__lin_com2')
+    @api.model
+    def fields_get(self, allfields=None, attributes=None):
+        res = super(GG_commande, self).fields_get(allfields, attributes)
+        fields_to_hide = ['write_uid','create_uid','create_date', 'write_date','ids__operation',
+                        'ids__lin_commande','ids__lin_com2','in_data','totale','d_chi','prix_p','id_vv1',
+                        'id_vv2','id_vv3','id_vv4','id_vv5','code_2v']
+        
+        for field in fields_to_hide:
+            res[field]['selectable'] = False  # disable field visible in filter
+            res[field]['sortable'] = False  # disable field visible in grouping
+        return res
+    @api.one
+    def def_kit(self):
+        ll=[1,29]
+        for val in ll:
+            self.ids__lin_com2=[(0,0,{"id_gg_produit":val} )]
+        
+        pass
     @api.one
     def pri(self):
         return self.env.ref('g_glass.action_report_gg_commande5').report_action(self)
     @api.one
-    def get_sale_order_data(self):
+    def to_st_0(self):
+        self.state="0"
+    @api.one
+    def to_st_1(self):
+        self.state="1"
+    @api.one
+    def to_st_2(self):
+        self.st_1()
+        self.state="2"
+    @api.one
+    def st_1(self):
         self.calc()
+        id_created = self.env['gg_facteur'].create({'name': self.name})
+  
+        for rec in self.ids__lin_com2:
+            id_created.ids__lin_com3=[(0,0,{"id_gg_produit":rec.id_gg_produit.id,"qent":rec.qent,"depot_out":"depot_4"} )]
+            # rec.id_gg_produit.qent_stk-=rec.qent
+
+    
+        
+        
+    
+    @api.one
+    def get_sale_order_data2(self):
+        da=[]
+        for rec in  self.ids__operation:
+            da.append(rec.name)
+
+        return da
+
+    @api.onchange('id_gg_client')
+    def _onchange_id_gg_client(self):
+        try:
+            if self.id_gg_client:
+                self.name =self.id_gg_client.name
+        except :
+            pass
+        
+    @api.one
+    def get_sale_order_data(self):
+        
         ll=[];
         
         for rec in  self.ids__lin_commande:
             da=[]
-            da.append("commande verre")
+            da.append("C - V")
             da.append(rec.longueur)
             da.append(rec.largeur)
             da.append(rec.Qte)
@@ -29,8 +96,7 @@ class GG_commande(models.Model):
             ll.append(da)
         for rec in  self.ids__lin_com2:
             da=[]
-            print(rec)
-            print(rec.id_gg_produit)
+
             
             
             if str(rec.id_gg_produit) == "gg_produit()":
@@ -44,47 +110,28 @@ class GG_commande(models.Model):
             da.append(rec.unti)
             da.append(rec.qent*rec.unti)
             ll.append(da)
-            print(ll)
         return ll
-    id_gg_partner = fields.Many2one('gg_partner', string='Client')
+    id_gg_client = fields.Many2one('gg_client', string='Client')
     in_data = fields.Char(string='in_data')
-    totale = fields.Float(string='totale')
-    d_chi=fields.Float(string='d_chi')
-    prix_p=fields.Float(string='prix_p')
+    totale = fields.Float(string='totale',digits=(10, 2))
+    
+
+    versement = fields.Float(string='Versement',digits=(10, 2))
+    
+    d_chi=fields.Float(string='d_chi',digits=(10, 1))
+    prix_p=fields.Float(string='prix_p',digits=(10, 2))
     
     # prix_p = fields.Float(compute='_c_prix_p', store=True)
     # @api.depends('totale','')
     # def _c_prix_p(self):
     #     self.prix_p=10
     #     pass
+    
+    
     def valid(self):
-        for rec in self.ids__lin_com2:
-            rec.id_gg_produit.qent_stk-=rec.qent
+        pass
 
-        data = {}
-        sperimeter = 0
-        sarea = 0
-        for rec in self.ids__lin_commande:
-            r_area= rec.longueur*rec.largeur*rec.Qte
-            r_peri = (2*(rec.longueur+rec.largeur))*rec.Qte
-            r_data = {}
-            r_data["area"] = r_area
-            r_data["perimeter"] = r_peri
-            r_data["fix"] = 1
-            for rec2 in rec.ids__operation:
-                rec2.fun_calc(r_data,1)[0]
-            sperimeter += r_peri
-            sarea +=r_area
-            
-        data["area"] = sarea
-        data["perimeter"] = sperimeter
-        data["fix"] = 1
-        self.in_data = str(data)
-        # functio nculc all
-        
-        for rec in self.ids__operation:
-            rec.fun_calc(data,1)[0]
-
+    # *****************************************
     # @api.onchange("ids__operation", "ids__lin_commande","ids__lin_com2")
     # def bt1(self):
     #     stotale = 0
@@ -120,11 +167,8 @@ class GG_commande(models.Model):
 
     # @api.onchange("calc")
     def calc(self):
-        
-        
         stotale = 0
         data = {}
-        
         sperimeter = 0
         sarea = 0
         sfix=0
@@ -134,7 +178,6 @@ class GG_commande(models.Model):
             sperimeter += r_peri
             sarea +=r_area
             sfix +=1
- 
         data["area"] = sarea
         data["perimeter"] = sperimeter
         data["fix"] = sfix
@@ -146,18 +189,26 @@ class GG_commande(models.Model):
         # apri calc d_chi
         # functio nculc all
         lis=[self.id_vv1.id,self.id_vv2.id,self.id_vv3.id,self.id_vv4.id,self.id_vv5.id]
-        ob1 = self.env['gg_2v'].search([('id_vv', '=', self.id_vv1.id)])
+        # ob1 = self.env['gg_2v'].search([('id_vv', '=', self.id_vv1.id)])
         for ob in lis:
+            
             ob1 = self.env['gg_2v'].search([('id_vv', '=', ob)])
-            for rec in ob1.ids__operation:
-                stotale += rec.fun_calc(data)[0]
+            try:
+                for rec in ob1.ids__operation:
+                    
+                    stotale += rec.fun_calc(data)[0]
+            except :
+                    pass
+        try:
+            self.prix_p=stotale/sarea
+        except :
+            pass
         
-        self.prix_p=stotale/sarea
         for rec in self.ids__lin_com2:
             stotale += rec.qent*rec.unti
         self.totale = stotale
         
-    
+
 
     #  vv
     id_vv1 = fields.Many2one('gg_pro_glass', string='pro_glass')
@@ -166,39 +217,43 @@ class GG_commande(models.Model):
     id_vv4 = fields.Many2one('gg_pro_glass', string='pro_glass')
     id_vv5 = fields.Many2one('gg_pro_glass', string='pro_glass')
 
-    state = fields.Selection([
-        ('et1', 'et1'),
-        ('et2', 'et2'),
-        ('et3', 'et3'),
-        ('et4', 'et4'),],
-        string='Status', default='et1')
-    code_2v = fields.Char(string='code_2v')
-    
 
-class GG_partner(models.Model):
-    _name = "gg_partner"
-    _inherits = {'res.partner': 'partner_id'}
+    code_2v = fields.Char(string='code_2v')
 
 class GG_lin_commande(models.Model):
     _name = 'gg_lin_commande'
     _description = 'gg_lin_commande'
     name = fields.Char(string='Name')
     id_gg_commande = fields.Many2one('gg_commande', string='gg_commande')
-    longueur = fields.Float(string='Largeur',digits=(10, 4))
-    largeur = fields.Float(string='Hauteur',digits=(10, 4))
-    prix_p=fields.Float(related='id_gg_commande.prix_p', store=False, string='Prix Unitaire', readonly=True,digits=(10, 4))
-    Qte = fields.Float(string='Qté', default=1,digits=(10, 4))
+    longueur = fields.Float(string='Largeur',digits=(10, 2))
+    largeur = fields.Float(string='Hauteur',digits=(10, 2))
+    prix_p=fields.Float(related='id_gg_commande.prix_p', store=False, string='Prix Unitaire', readonly=True,digits=(10, 2))
+    Qte = fields.Float(string='Qté', default=1,digits=(10, 2))
     ids__operation = fields.Many2many('gg_operation', string='gg_operation')
     # total_m = fields.Float(string='Montant HT')
     
-    total_m = fields.Float(compute='_c_total_m',string='Montant HT',digits=(10, 4))
+    total_m = fields.Float(compute='_c_total_m',string='Montant HT',digits=(10, 2))
     @api.one
     @api.depends('longueur','largeur','prix_p','Qte')
     def _c_total_m(self):
         self.total_m=self.longueur*self.largeur*self.prix_p*self.Qte
-        # self.total_m=10
         
+        # self.total_m=10
 
+
+class GG_lin_com3(models.Model):
+    _name = 'gg_lin_com3'
+    _description = 'gg_lin_com3'
+    name = fields.Char(string='Name')
+    id_gg_produit = fields.Many2one('gg_produit', string='produit')
+    id_gg_facteur = fields.Many2one('gg_facteur', string='gg_facteur')
+    qent = fields.Float(string='qent')
+    unti = fields.Float(string='prix unti')
+
+    @api.onchange("id_gg_produit")
+    def bt1(self):
+        self.unti=self.id_gg_produit.prix_unti
+        pass
 class GG_lin_com2(models.Model):
     _name = 'gg_lin_com2'
     _description = 'gg_lin_com2'
@@ -216,14 +271,20 @@ class GG_produit(models.Model):
     _name = 'gg_produit'
     _description = 'gg_produit'
     name=fields.Char(string="code d'article")
+    
     code=fields.Char(string='article')
     prix_unti=fields.Float(string='prix unti')
     qent_stk=fields.Float(string='Qté stock ')
     unit_mes=fields.Char(string='unité de mesure')
-    prix_G=fields.Float(string='prix_G')
-    
-    
-
+    PrixaA  =  fields.Float(string='PrixaA')
+    PvDA  =  fields.Float(string='PvDA')
+    PvGA  =  fields.Float(string='PvGA')
+    PvGA  =  fields.Float(string='PvGA')
+    note=fields.Char(string='note')
+    depot_1=fields.Float(string='depot 1', default=0)
+    depot_2=fields.Float(string='depot 2', default=0)
+    depot_3=fields.Float(string='depot 3', default=0)
+    depot_4=fields.Float(string='depot 4', default=0)
 class GG_pro_glass(models.Model):
     _name = 'gg_pro_glass'
     _description = 'gg_pro_glass'
@@ -245,30 +306,76 @@ class GG_pro_glass(models.Model):
 
         ],
         string='p_type', default='gla')
+
+
+class GG_client(models.Model):
+    _name = 'gg_client'
+    _description = 'gg_client'
+    name = fields.Char(string='Name')
+    code = fields.Char(string='code')
+    Mobile = fields.Char(string='Mobile')
+    note = fields.Char(string='note')
+    Adresse = fields.Char(string='Adresse')
+
 class GG_facteur(models.Model):
     _name = 'gg_facteur'
     _description = 'gg_facteur'
-
     name = fields.Char(string='Name')
-    id_gg_produit = fields.Many2one('gg_produit', string='produit')
+    note = fields.Text(string='Note')
     state = fields.Selection([
-        ('et', 'entrée en stock '),
-        ('so', ' sortie de stoc'),],
-        string='Status', default='et')
-    qent=fields.Float(string='Qté  ')
-    @api.one
+            ('0',"Brouillon"),
+            ('1', "En cours"),
+            ('2', "Terminé"),
+            ],
+        string='Status', default='0')
+    
+    depot_in = fields.Selection([
+        ('depot_1', 'depot_1'),
+        ('depot_2', 'depot_2'),
+        ('depot_3', 'depot_3'),
+        ('depot_4', 'depot_4'),],
+        string='depot_in', default='')
+    depot_out = fields.Selection([
+        ('depot_1', 'depot_1'),
+        ('depot_2', 'depot_2'),
+        ('depot_3', 'depot_3'),
+        ('depot_4', 'depot_4'),],
+        string='depot_out', default='')
+    ids__lin_com3 = fields.One2many('gg_lin_com3', 'id_gg_facteur', string='ids__lin_com3')
+    
+    
     def fun_calc(self):
-        if(self.state=='et'):
-            self.id_gg_produit.qent_stk+=self.qent
-        else:
-            self.id_gg_produit.qent_stk-=self.qent
+        for rec in self.ids__lin_com3:
+            
+            if(self.depot_out=="depot_1"):
+                rec.id_gg_produit.depot_1-=rec.qent
+            elif(self.depot_out=="depot_2"):
+                rec.id_gg_produit.depot_2-=rec.qent
+            elif(self.depot_out=="depot_3"):
+                rec.id_gg_produit.depot_3-=rec.qent
+            elif(self.depot_out=="depot_4"):
+                rec.id_gg_produit.depot_4-=rec.qent
+            else:
+                pass
+            
+            if(self.depot_in=="depot_1"):
+                rec.id_gg_produit.depot_1+=rec.qent
+            elif(self.depot_in=="depot_2"):
+                rec.id_gg_produit.depot_2+=rec.qent
+            elif(self.depot_in=="depot_3"):
+                rec.id_gg_produit.depot_3+=rec.qent
+            elif(self.depot_in=="depot_4"):
+                rec.id_gg_produit.depot_4+=rec.qent
+            else:
+                pass
+        self.state="1"
 
 class GG_operation(models.Model):
     _name = 'gg_operation'
     _description = 'gg_operation'
     name = fields.Char(string='Name')
     code = fields.Char(string='code operation')
-    qent = fields.Float(string='prix unit', default=0,digits=(10, 4))
+    qent = fields.Float(string='prix unit', default=0,digits=(10, 2))
     PrixaA  =  fields.Float(string='PrixaA')
     PvDA  =  fields.Float(string='PvDA')
     id_gg_produit = fields.Many2one('gg_produit', string='produit')
@@ -366,7 +473,6 @@ class GG_vit(models.Model):
         s_si_f="""
             for val in out:
                 self.ids__lin_commande = [(0,0,val)]
-                print("fff")
                 """
         s_si_f=s_si_f.replace("            ", "")
         s_ex=s_pri_f+"\n"+cr+"\n"+s_si_f

@@ -24,6 +24,21 @@
                 </form>
             </field>
         </record>
+ <!-- gg_operation tree view -->
+ <record id="gg_operation_view_tree3" model="ir.ui.view">
+    <field name="name">gg_operation.view.tree3</field>
+    <field name="model">gg_operation</field>
+    <field name="priority" eval="3"/>
+    <field name="arch" type="xml">
+        <tree  >
+            <!-- <tree  editable="bottom"> -->
+            <!-- Add your fields here -->
+            <field name="name" string="Operation"/>
+
+                    
+        </tree>
+    </field>
+</record>
 
         <!-- gg_operation tree view -->
         <record id="gg_operation_view_tree" model="ir.ui.view">
