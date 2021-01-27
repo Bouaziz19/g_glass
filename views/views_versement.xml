@@ -1,0 +1,72 @@
+<odoo>
+  <data>
+
+  <!-- gg_versement form view -->
+  <record id="gg_versement_view_form" model="ir.ui.view">
+      <field name="name">gg_versement.view.form</field>
+      <field name="model">gg_versement</field>
+      <field name="arch" type="xml">
+          <form string="">
+              <sheet>
+                <group col="12">
+                    <group colspan="4">
+                      <field name="name" attrs="{'readonly': [ ('v_vers', '=',True)]}"/>
+                    </group>
+                    <group colspan="4">
+                        <field name="value" attrs="{'readonly': [ ('v_vers', '=',True)]}"/>
+                    </group>
+                    <group colspan="4">
+                        <field name="id_gg_client" attrs="{'readonly': [ ('v_vers', '=',True)]}" required="1" />
+                        
+                    </group>
+                    <group colspan="6">
+                        <field name="note" attrs="{'readonly': [ ('v_vers', '=',True)]}"/>
+                    <field name="v_vers" invisible ="1"/>
+                </group>
+                    <group colspan="4">
+                    <button string="Valider  versement" type="object" name="v_vers_to_T" attrs="{'invisible': [ ('v_vers', '=',True)]}" />
+                    
+                    </group>
+                    
+                  </group>
+              </sheet>
+          </form>
+      </field>
+  </record>
+<!-- gg_versement tree view -->
+<record id="gg_versement_view_tree" model="ir.ui.view">
+    <field name="name">gg_versement.view.tree</field>
+    <field name="model">gg_versement</field>
+    <field name="arch" type="xml">
+        <tree>
+            <!-- Add your fields here -->
+            <field name="name"/>
+                      <field name="value"/>
+                      <field name="id_gg_client"/>
+                      <field name="note"/>
+        </tree>
+    </field>
+</record>
+<!-- gg_versement action window -->
+<record id="gg_versement_action" model="ir.actions.act_window">
+    <field name="name">versement</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">gg_versement</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+        </p><p>
+            <!-- More details about what a user can do with this object will be OK --> 
+        </p>
+    </field>
+</record>
+
+
+<!-- This Menu Item must have a parent and an action -->
+<menuitem id="menu_gg_versement" name="versement" parent="menu_root_gg_Comp" action="gg_versement_action" sequence="1"/>
+
+
+  </data>
+</odoo>

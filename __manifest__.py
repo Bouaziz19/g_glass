@@ -23,8 +23,12 @@
 
         "views/views_2v.xml",
         "views/views_client.xml",
+        "views/views_versement.xml",
         #"views/views_2v.xml",
         #"views/views_2v.xml",
+        #"views/views_2v.xml",
+        #"views/views_2v.xml",
+        
         
         
 

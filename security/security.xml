@@ -14,10 +14,15 @@
             <field name="name">User</field>
             <field name="category_id" ref="module_g_glass"/>
         </record>
+        <record id="g_glass_comp" model="res.groups">
+            <field name="name">Comp</field>
+            <field name="category_id" ref="module_g_glass"/>
+        </record>
+        
         <record id="g_glass_manager" model="res.groups">
             <field name="name">Manager</field>
             <field name="category_id" ref="module_g_glass"/>
-            <field name="implied_ids" eval="[(4, ref('g_glass_user')),(4, ref('g_glass_st'))]"/>
+            <field name="implied_ids" eval="[(4, ref('g_glass_user')),(4, ref('g_glass_st')),(4, ref('g_glass_comp'))]"/>
         </record>
        
     </data>

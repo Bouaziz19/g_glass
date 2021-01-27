@@ -4,17 +4,31 @@
   <!-- gg_client form view -->
   <record id="gg_client_view_form" model="ir.ui.view">
       <field name="name">gg_client.view.form</field>
+      <field name="priority" eval="3"/>
       <field name="model">gg_client</field>
       <field name="arch" type="xml">
           <form string="">
               <sheet>
                   <group>
                         <field name="name" required="1"/>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="to_group" type="object" class="oe_stat_button" icon="fa-check-square" >
+                                    <field name="group" widget="boolean_button" options="{'terminology': {'string_true': 'group', 'string_false': 'NO group', 
+                                                                                                                'hover_true': 'group', 'hover_false': 'NO group'}}"/>
+                                   </button>
+                        </div>
+                        
+                        
+                        
                         <field name="code"/>
                         <field name="Mobile" widget="phone_intl" options="{'only_country_codes': ['dz']}"/> 
                         <field name="note"/>
                         <field name="Adresse"/>
+                        <field name="Solde" readonly="1"/>
+                      
                   </group>
+                 
+                
               </sheet>
           </form>
       </field>
@@ -22,6 +36,7 @@
 <!-- gg_client tree view -->
 <record id="gg_client_view_tree" model="ir.ui.view">
     <field name="name">gg_client.view.tree</field>
+    <field name="priority" eval="3"/>
     <field name="model">gg_client</field>
     <field name="arch" type="xml">
         <tree>
@@ -30,9 +45,98 @@
         </tree>
     </field>
 </record>
+  <!-- gg_client form view -->
+<record id="gg_client_view_form_n2" model="ir.ui.view">
+    <field name="name">gg_client.view.form_n2</field>
+    <field name="priority" eval="16"/>
+    <field name="model">gg_client</field>
+    <field name="arch" type="xml">
+        <form string="">
+            <sheet>
+                <group>
+                      <field name="name" required="1"/>
+                      <div class="oe_button_box" name="button_box">
+                          <button name="to_group" type="object" class="oe_stat_button" icon="fa-check-square" >
+                                  <field name="group" widget="boolean_button" options="{'terminology': {'string_true': 'group', 'string_false': 'NO group', 
+                                                                                                              'hover_true': 'group', 'hover_false': 'NO group'}}"/>
+                                 </button>
+                      </div>
+                      
+                      
+                      
+                      <field name="code"/>
+                      <field name="Mobile" widget="phone_intl" options="{'only_country_codes': ['dz']}"/> 
+                      <field name="note"/>
+                      <field name="Adresse"/>
+                      <field name="Solde" readonly="1"/>
+                      
+                      
+                </group>
+                <notebook>
+                          
+                    <page string="commande">
+                        
+                        <field  string="commande" name="ids__gg_commande" widget="one2many" readonly="1">
+                            <tree   >
+                                <field name="name" string="name"/>
+                                <field name="totale" />
+                                <field name="versement" string="versement"/>
+                                <field name="v_vers" string="Paiement reçu "  />
+                                <!-- <field name="ids__operation" widget="many2many_tags" attrs="{'readonly': [ ('state', 'not in', ['0'])]}"/>                 -->
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="name" />                                        
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                     </page>
+                     <page string="versement" >
+                        <field string="versement" name="ids__gg_versement" widget="one2many" readonly='1'>
+                            <tree  >
+                                <field name="name" string="name"/>
+                                
+                                <field name="value" />
+                                <field name="note" />
+                                <field name="v_vers" string="Paiement reçu "  />
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="name" />
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                        
+                    </page>
+                 
+                    </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+<record id="gg_client_view_tree_n2" model="ir.ui.view">
+    <field name="name">gg_client.view.tree_n2</field>
+    <field name="priority" eval="16"/>
+    <field name="model">gg_client</field>
+    <field name="arch" type="xml">
+        <tree>
+            <!-- Add your fields here -->
+            <field name="name"/>
+            <field name="code"/>
+            <field name="Mobile" /> 
+            <field name="note"/>
+            <field name="Adresse"/>
+            <field name="Solde" />
+        </tree>
+    </field>
+</record>
 <!-- gg_client action window -->
-<record id="gg_client_action" model="ir.actions.act_window">
-    <field name="name">gg_client.action</field>
+<record id="gg_client_action_n2" model="ir.actions.act_window">
+    <field name="name">gg_client.action_n2</field>
     <field name="type">ir.actions.act_window</field>
     <field name="res_model">gg_client</field>
     <field name="view_mode">tree,form</field>
@@ -45,11 +149,146 @@
         </p>
     </field>
 </record>
+<record id="g_glass.gg_client_view_tree_n2_lin" model="ir.actions.act_window.view">
+    <field name="sequence" eval="1"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="g_glass.gg_client_view_tree_n2"/>
+    <field name="act_window_id" ref="g_glass.gg_client_action_n2"/>
+</record>
+<record id="g_glass.gg_client_view_form_n2_lin" model="ir.actions.act_window.view">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="g_glass.gg_client_view_form_n2"/>
+    <field name="act_window_id" ref="g_glass.gg_client_action_n2"/>
+</record>
 
 
 <!-- This Menu Item must have a parent and an action -->
-<menuitem id="menu_gg_client" name="gg_client" parent="menu_root_gg_DB" action="gg_client_action" sequence="1"/>
+<menuitem id="menu_gg_client" name="gg_client" parent="menu_root_gg_DB" action="gg_client_action_n2" sequence="1"/>
 
+<record id="gg_client_view_form_n3" model="ir.ui.view">
+    <field name="name">gg_client.view.form_n3</field>
+    <field name="priority" eval="16"/>
+    <field name="model">gg_client</field>
+    <field name="arch" type="xml">
+        <form string="">
+            <sheet>
+                <group>
+                      <field name="name" required="1"/>
+                      <div class="oe_button_box" name="button_box">
+                          <button name="to_group" type="object" class="oe_stat_button" icon="fa-check-square" >
+                                  <field name="group" widget="boolean_button" options="{'terminology': {'string_true': 'group', 'string_false': 'NO group', 
+                                                                                                              'hover_true': 'group', 'hover_false': 'NO group'}}"/>
+                                 </button>
+                      </div>
+                      
+                      
+                      
+                      <field name="code"/>
+                      <field name="Mobile" widget="phone_intl" options="{'only_country_codes': ['dz']}"/> 
+                      <field name="note"/>
+                      <field name="Adresse"/>
+                      <field name="Solde" readonly="1"/>
+                      
+                      
+                </group>
+                <notebook>
+                          
+                    <page string="commande">
+                        <field  string="commande" name="ids__gg_commande" widget="one2many" readonly="1">
+                            <tree   >
+                                <field name="name" string="name"/>
+                                <field name="totale" />
+                                <!-- <field name="v_vers" widget="boolean_toggle" readonly="1"/> -->
+                                
+                                <field name="versement" string="versement"/>
+                                <field name="v_vers" string="Paiement reçu "  />
+                                <!-- <field name="ids__operation" widget="many2many_tags" attrs="{'readonly': [ ('state', 'not in', ['0'])]}"/>                 -->
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="name" />                                        
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                     </page>
+                     <page string="versement" >
+                        <field string="versement" name="ids__gg_versement" widget="one2many" readonly='1' >
+                            <tree  >
+                                <field name="name" string="name"/>
+                                
+                                <field name="value" />
+                                <field name="note" />
+                                <field name="v_vers" string="Paiement reçu "  />
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group>
+                                        <field name="name" />
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                        
+                    </page>
+                 
+                    </notebook>
+            </sheet>
+        </form>
+    </field>
+</record>
+<record id="gg_client_view_tree_n3" model="ir.ui.view">
+    <field name="name">gg_client.view.tree_n3</field>
+    <field name="priority" eval="16"/>
+    <field name="model">gg_client</field>
+    <field name="arch" type="xml">
+        <tree>
+            <!-- Add your fields here -->
+            <field name="name"/>
+            <field name="code"/>
+            <field name="Mobile" /> 
+            <field name="note"/>
+            <field name="Adresse"/>
+            <field name="Solde" />
+        </tree>
+    </field>
+</record>
+<!-- gg_client action window -->
+<record id="gg_client_action_n3" model="ir.actions.act_window">
+    <field name="name">gg_client.action_n3</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">gg_client</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_type">form</field>
+    <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+            <!-- Add Text Here -->
+        </p><p>
+            <!-- More details about what a user can do with this object will be OK --> 
+        </p>
+    </field>
+</record>
+<record id="g_glass.gg_client_view_tree_n3_lin" model="ir.actions.act_window.view">
+    <field name="sequence" eval="1"/>
+    <field name="view_mode">tree</field>
+    <field name="view_id" ref="g_glass.gg_client_view_tree_n3"/>
+    <field name="act_window_id" ref="g_glass.gg_client_action_n3"/>
+</record>
+<record id="g_glass.gg_client_view_form_n3_lin" model="ir.actions.act_window.view">
+    <field name="sequence" eval="2"/>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="g_glass.gg_client_view_form_n3"/>
+    <field name="act_window_id" ref="g_glass.gg_client_action_n3"/>
+</record>
+
+
+<!-- This Menu Item must have a parent and an action -->
+<menuitem id="menu_gg_client_n3" name="gg_client_n3" parent="menu_root_gg_Comp" action="gg_client_action_n3" sequence="1"/>
+<record id="g_glass.menu_gg_client_n3" model="ir.ui.menu">
+    <field name="groups_id" eval="[(6,0,[ref('g_glass.g_glass_comp')])]"/>
+</record>
 
   </data>
 </odoo>

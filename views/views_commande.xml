@@ -45,60 +45,71 @@
                             <!-- <field name="state" invisible="1"/> -->
                             <!-- <field name="name" attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" /> -->
                                 
-                            <field name="name" attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" required="1" />
+                            <field name="name" attrs="{'readonly': [ ('state', 'not in', ['0'])]}"  />
                             <field name="create_date" string="D/H"/>
+                            <field name="num" readonly="1"/>
+                            
                         </group>
                             
                             <group>
-                                <field name="id_gg_client" string="Client" attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" />
+
+                                    
+                                
+                                
+                                
+                                <field name="id_gg_client" string="Client" attrs="{'readonly': [ ('state', 'not in', ['0'])]}" required="1" />
                            
-                                
-                                <field name="num" readonly="1"/>
-                                
+                    
+                                <label for="street" string=" permanent :" class="oe_edit_only" /> 
+                                    <field name="permanent" string="permanent" widget="boolean_toggle" class="oe_edit_only"  nolabel="1" />
+                                <field name="Mobile"  attrs="{'invisible': [ ('permanent', '=',True)]}" />
+                                    
                             </group>
                            
 
                         </group>
-                        <group col="12">
+                        <group col="12" >
                                 <group colspan="1" ><label for="street" string=" "/> 
                                 </group>
                             <group colspan="2">
-                                <field attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" name="id_vv1" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
+                                <field attrs="{'readonly': [ ('state', 'not in', ['0'])],}" name="id_vv1" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
                         </group>
                             <group colspan="2">
-                                <field attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" name="id_vv2" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
+                                <field attrs="{'readonly': [ ('state', 'not in', ['0'])],}" name="id_vv2" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
                         </group>
                             <group colspan="1" >
-                                <field attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" name="id_vv3" nolabel="1" domain="[('p_type', '=', 'Int')] "/>
+                                <field attrs="{'readonly': [ ('state', 'not in', ['0'])],}" name="id_vv3" nolabel="1" domain="[('p_type', '=', 'Int')] "/>
                         </group>
                             <group colspan="2">
-                                <field attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" name="id_vv4" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
+                                <field attrs="{'readonly': [ ('state', 'not in', ['0'])],}" name="id_vv4" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
                         </group>
                             <group colspan="2">
-                                <field attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" name="id_vv5" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
+                                <field attrs="{'readonly': [ ('state', 'not in', ['0'])],}" name="id_vv5" nolabel="1" domain="[('p_type', '=', 'gla')] "/>
                         </group>
                         </group> 
                         
-                      
+                    
+                    
                         
+                
                         
 <!--<tree string="ids__lin_commander" create="false" edit="false" editable="bottom" widget="one2many">-->
     <notebook>
                             
         <page string="Verre">
         <group nolabel="1"> 
-                <field  attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" name="ids__operation" widget="many2many_tags" domain="[('op_type', '=', 't2')]" string="Operation" />
+                <field  attrs="{'readonly': [ ('state', 'not in', ['0'])]}" name="ids__operation" widget="many2many_tags" domain="[('op_type', '=', 't2')]" string="Operation" />
                 <!-- <button string="calc" type="object" name="calc" attrs="{'invisible': [ ('state', 'not in', ['0','1'])]}" /> -->
            
             </group>
-            <field  string="Verre" name="ids__lin_commande" widget="one2many">
+            <field  string="Verre" name="ids__lin_commande" widget="one2many" attrs="{'readonly': [ ('state', 'not in', ['0'])]}">
                 <tree   editable="bottom" >
                     <field name="longueur" string="lar"/>
                     <field name="largeur" string="long"/>
                     <field name="Qte" />
                     <field name="prix_p" string="prix unitaire"/>
                     <field name="total_m" />
-                    <!-- <field name="ids__operation" widget="many2many_tags" attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}"/>                 -->
+                    <!-- <field name="ids__operation" widget="many2many_tags" attrs="{'readonly': [ ('state', 'not in', ['0'])]}"/>                 -->
                 </tree>
                 <!-- <form>
                     <sheet>
@@ -122,7 +133,7 @@
                 </group>
             </group> -->
              
-            <field string="produit" name="ids__lin_com2" widget="one2many" attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}">
+            <field string="produit" name="ids__lin_com2" widget="one2many" attrs="{'readonly': [ ('state', 'not in', ['0'])]}">
                 <tree   editable="bottom" >
                     <field name="name" />
                     <field name="id_gg_produit" />
@@ -140,24 +151,44 @@
             </field>
             
         </page>
-     
+        <!-- <page string="Prix Unitaire">
+            <group col="12">
+                <group colspan="12">
+                    
+                    
+                </group>
+                </group>
+            
+            
+             </page> -->
         </notebook>
- 
+        <label for="street" string=" Prix ​​unitaire fixe  :"  class="oe_edit_only"/> 
+        <field name="Fix_prix" string="Prix ​​unitaire fixe " widget="boolean_toggle" class="oe_edit_only"  nolabel="1"  />
+        <label for="street" string=" Prix ​​unitaire fixe  : OUI"  attrs="{'invisible': [ ('Fix_prix', '=',False)]}" class="oe_read_only"/> 
+        <label for="street" string=" Prix ​​unitaire fixe  : NO"   attrs="{'invisible': [ ('Fix_prix', '=',True)]}" class="oe_read_only" /> 
+        
                         <group col="12">
-                            <group colspan="6">
+                            <group colspan="8">
                                 
                                         
-                                        <group colspan="1" ><field name="d_chi" string="pourcentage de déchets: " attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}" /></group>
+                                        <group colspan="1" >
+                                            <field name="prix_p" string="Prix ​​unitaire : "  attrs="{'invisible': [ ('Fix_prix', '=',False)]}" />
+                                            
+                                            <field name="d_chi" string="pourcentage de déchets: " attrs="{'readonly': [ ('state', 'not in', ['0'])],'invisible': [ ('Fix_prix', '=',True)]}" /></group>
                                     
-                                    <group colspan="1"><button string="calc" type="object" name="calc" attrs="{'invisible': [ ('state', 'not in', ['0','1'])]}" /></group>
+                                    <group colspan="1">
+                                        <!-- <button string="calc" type="object" name="calc" attrs="{'invisible': [ ('state', 'not in', ['0'])]}" /> -->
+                                    </group>
                                
                             
                             </group>
                             <group colspan="4">
+                                <field name="v_vers" string="v_vers"  invisible="1"/>
                                 <field name="totale" string="Totale : " readonly="1" />
-                                <!-- <button string="vald" type="object" name="valid"  /> -->
-    
+                                <field name="Solde" string="Solde : " />
+                                <field name="versement" string="versement : " attrs="{'readonly': [ ('v_vers', '=',True)]}" />
                             </group>
+                           
                         </group>
                     </sheet>
                 </form>
@@ -191,16 +222,18 @@
                 <p>Cliquer sur Créer pour ajouter un nouveau </p>
             </field>
         </record>
-        <record id="gg_commande_action2" model="ir.actions.act_window">
-            <field name="name">commande</field>
-            <field name="res_model">gg_commande</field>
+
+        <record id="g_glass.gg_commande_view_form_lin1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
             <field name="view_mode">form</field>
-            <field name="context">{'default_id': context.get('id', False),}</field>
-            <field name="target">new</field>
-            <field name="help" type="html">
-                <p>Cliquer sur Créer pour ajouter un nouveau </p>
-            </field>
-            
+            <field name="view_id" ref="g_glass.gg_commande_view_form"/>
+            <field name="act_window_id" ref="g_glass.gg_commande_action"/>
+        </record>
+        <record id="g_glass.gg_commande_view_tree_lin1" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="g_glass.gg_commande_view_tree"/>
+            <field name="act_window_id" ref="g_glass.gg_commande_action"/>
         </record>
 
 
@@ -211,5 +244,191 @@
         <record id="g_glass.menu_gg_commande" model="ir.ui.menu">
             <field name="groups_id" eval="[(6,0,[ref('g_glass.g_glass_user')])]"/>
         </record>
+        
+        <!-- compt  -->
+                <!-- gg_commande form view -->
+                <record id="gg_commande_view_form2" model="ir.ui.view">
+                    <field name="name">gg_commande.view.form2</field>
+                    <field name="model">gg_commande</field>
+                    <field name="arch" type="xml">
+                        <form string="">
+                            <header>
+                                <field name="state" widget="statusbar" statusbar_visible="0,1,2"/>
+                                <!-- <button name="%(action_report_gg_commande5)d" string="Facture" type="action"   attrs="{'invisible': [ ('state', 'not in', ['1','2'])]}" />
+                                <button name="%(action_report_gg_commande5)d" string=" FEUILLE DE ROUTE" type="action"   attrs="{'invisible': [ ('state', 'not in', ['2'])]}" />
+                                <button name="%(action_report_gg_commande5)d" string="Devis" type="action"   attrs="{'invisible': [ ('state', 'not in', ['0'])]}" />
+                                     -->
+                            </header>
+                            <sheet>
+                            
+                                <group>
+                                    <group>
+
+                                    <field name="name"  readonly="1" />
+                                    <field name="create_date" string="D/H"/>
+                                </group>
+                                    
+                                    <group>
+                                        <field name="id_gg_client" string="Client"  readonly="1"  />
+                                   
+                                        
+                                        <field name="num" readonly="1"/>
+                                        
+                                    </group>
+                                   
+        
+                                </group>
+                                
+                                <!-- <group col="12">
+                                        <group colspan="1" ><label for="street" string=" "/> 
+                                        </group>
+                                    <group colspan="2">
+                                        <field  readonly="1"  name="id_vv1" nolabel="1" />
+                                </group>
+                                    <group colspan="2">
+                                        <field  readonly="1"  name="id_vv2" nolabel="1" />
+                                </group>
+                                    <group colspan="1" >
+                                        <field  readonly="1"  name="id_vv3" nolabel="1" />
+                                </group>
+                                    <group colspan="2">
+                                        <field  readonly="1"  name="id_vv4" nolabel="1" />
+                                </group>
+                                    <group colspan="2">
+                                        <field  readonly="1"  name="id_vv5" nolabel="1" />
+                                </group>
+                                </group>  -->
+
+            <notebook>
+                                    
+                <page string="Verre">
+                <group nolabel="1"> 
+                        <!-- <field   readonly="1"  name="ids__operation" widget="many2many_tags"  string="Operation" /> -->
+                        <!-- <button string="calc" type="object" name="calc" attrs="{'invisible': [ ('state', 'not in', ['0','1'])]}" /> -->
+                   
+                    </group>
+                    <field  string="Verre" name="ids__lin_commande" widget="one2many"  readonly="1" >
+                        <tree   editable="bottom" >
+                            <field name="longueur" string="lar"/>
+                            <field name="largeur" string="long"/>
+                            <field name="Qte" />
+                            <field name="prix_p" string="prix unitaire"/>
+                            <field name="total_m" />
+                            <!-- <field name="ids__operation" widget="many2many_tags" attrs="{'readonly': [ ('state', 'not in', ['0','1'])]}"/>                 -->
+                        </tree>
+                        <!-- <form>
+                            <sheet>
+                                <group>
+                                    <field name="longueur" />
+                                    <field name="largeur" />
+                                    <field name="Qte" />                                            
+                                </group>
+                            </sheet>
+                        </form> -->
+                    </field>
+                 </page>
+                 <page string="produit" >
+                    <!-- <group col="12">
+                        <group colspan="2">
+                        </group>
+                        <group colspan="3">
+                            <button string="kit" type="object" name="def_kit" />
+        
+        
+                        </group>
+                    </group> -->
+                     
+                    <field string="produit" name="ids__lin_com2" widget="one2many"  readonly="1" >
+                        <tree   editable="bottom" >
+                            <field name="name" />
+                            <field name="id_gg_produit" />
+                            <field name="qent" />
+                            <field name="unti" />
+                        </tree>
+                        <form>
+                            <sheet>
+                                <group>
+                                    <field name="qent" />
+                                    <field name="unti" />
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                    
+                </page>
+             
+                </notebook>
+         
+                                <group col="12">
+                                    <group colspan="8">
+                                        
+                                                <!-- <field name="d_chi" string="pourcentage de déchets: "  readonly="1"  /> -->
+                                                <!-- <button string="v_vers_to_T" type="object" name="v_vers_to_T" attrs="{'invisible': [ ('v_vers', '=',True)]}" /> -->
+                                            
+                                            
+                                       
+                                    
+                                    </group>
+                                    <group colspan="4">
+                                        <field name="v_vers" string="Paiement reçu "  invisible="1"/>
+                                        <field name="totale" string="Totale : " readonly="1" />
+                                        <field name="Solde" string="Solde : " />
+                                        <field name="versement" string="versement : " attrs="{'readonly': [ ('v_vers', '=',True)]}" />
+                                        <button string="Valider  versement" type="object" name="v_vers_to_T" attrs="{'invisible': [ ('v_vers', '=',True)]}" />
+    
+                                    </group>
+                                </group>
+                            </sheet>
+                        </form>
+                    </field>
+                </record>
+        
+                <!-- gg_commande tree view -->
+                <record id="gg_commande_view_tree2" model="ir.ui.view">
+                    <field name="name">gg_commande.view.tree2</field>
+                    <field name="model">gg_commande</field>
+                    <field name="arch" type="xml">
+                        <tree default_order='create_date'>
+                            <!-- <field name="sequence" widget="handle"/> -->
+                            <!-- Add your fields here -->
+                            <field name="name" string="name"/>
+                            <field name="id_gg_client"  string="Client" />
+        
+                            <field name="state" />
+                            
+                            
+                        </tree>
+                    </field>
+                </record>
+                <!-- gg_commande action window -->
+          
+                <record id="gg_commande_action2" model="ir.actions.act_window">
+                    <field name="name">commande2</field>
+                    <field name="res_model">gg_commande</field>
+                    <field name="view_mode">tree,form</field>
+                    <field name="help" type="html">
+                        <p>Cliquer sur Créer pour ajouter un nouveau </p>
+                    </field>
+                </record>
+        
+                <record id="g_glass.gg_commande_view_form_lin2" model="ir.actions.act_window.view">
+                    <field name="sequence" eval="2"/>
+                    <field name="view_mode">form</field>
+                    <field name="view_id" ref="g_glass.gg_commande_view_form2"/>
+                    <field name="act_window_id" ref="g_glass.gg_commande_action2"/>
+                </record>
+                <record id="g_glass.gg_commande_view_tree_lin2" model="ir.actions.act_window.view">
+                    <field name="sequence" eval="1"/>
+                    <field name="view_mode">tree</field>
+                    <field name="view_id" ref="g_glass.gg_commande_view_tree2"/>
+                    <field name="act_window_id" ref="g_glass.gg_commande_action2"/>
+                </record>
+                <!-- This Menu Item must have a parent and an action -->
+                <menuitem id="menu_gg_commande2" name="commande2" parent="menu_root_gg_Comp" action="gg_commande_action2" sequence="1" />
+                
+                <record id="g_glass.menu_gg_commande2" model="ir.ui.menu">
+                    <field name="groups_id" eval="[(6,0,[ref('g_glass.g_glass_comp')])]"/>
+                </record>
+        
     </data>
 </odoo>
