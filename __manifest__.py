@@ -1,6 +1,6 @@
 {
     "name": "g_glass",
-    "version": '0.0.0',
+    "version": '12.0.0',
     "license": "LGPL-3",
     "author": "g_glass",
     "website": "https://www.g_glass.at",
